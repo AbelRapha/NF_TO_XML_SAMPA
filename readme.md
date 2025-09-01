@@ -33,24 +33,47 @@ NF_TO_XML_SAMPA é uma ferramenta desenvolvida para facilitar a conversão de ar
    pip install -r requirements.txt
    ```
 
-### 3. Utilização
+## Formas de Utilização
 
-1. Coloque o arquivo de Nota Fiscal (ex: `nfse_sp.xml`) na pasta do projeto.
-2. Execute o script principal:
-   ```bash
-   python app.py --input nfse_sp.xml --output resultado.xml
-   ```
-   - `--input`: caminho do arquivo NF-e a ser convertido
-   - `--output`: nome do arquivo XML de saída
+### 1. Interface Web com Streamlit
 
-3. O arquivo convertido estará disponível no local especificado.
+Execute o aplicativo Streamlit para utilizar a interface gráfica:
 
-### 4. Exemplo de Uso
 ```bash
-python app.py --input nfse_sp.xml --output resultado.xml
+streamlit run app.py
 ```
 
-### 5. Suporte
+Você poderá fazer upload do arquivo CSV e baixar o XML gerado diretamente pela interface web.
+
+### 2. API REST com FastAPI
+
+Execute a API para conversão via requisição HTTP:
+
+1. Instale os pacotes necessários:
+   ```bash
+   pip install fastapi uvicorn
+   ```
+2. Execute o servidor FastAPI:
+   ```bash
+   uvicorn api:app --reload
+   ```
+3. Acesse a documentação interativa em [http://localhost:8000/docs](http://localhost:8000/docs)
+
+#### Exemplo de requisição via `curl`:
+```bash
+curl -X POST "http://localhost:8000/convert-csv" -F "file=@seuarquivo.csv" --output nfse_sp.xml
+```
+
+O arquivo XML será baixado como resposta.
+
+### 3. Execução via linha de comando (se aplicável)
+
+Caso o script principal aceite argumentos, execute:
+```bash
+python app.py --input seuarquivo.csv --output resultado.xml
+```
+
+## Suporte
 Em caso de dúvidas ou problemas, abra uma issue no repositório ou entre em contato com o mantenedor.
 
 ---
